@@ -95,10 +95,17 @@ function setDistanceLabel(_args) {
 var coords = Ti.UI.createLabel({});
 
 if (isLocationAuthorized({purpose:'To display your current co-ordinates'})) {
-	getLocation({success : function(e) {
-		                    setDistanceLabel({distance : distanceFromTheEquator({lat: e.latitude , lon: e.longitude})})
-		                    }
-		       });
+	getLocation(
+		{success : function(e) 
+			{setDistanceLabel(
+				{distance : distanceFromTheEquator(
+					{lat: e.latitude,
+					 lon: e.longitude
+					 })
+				})
+			}
+		}
+	);
 };
 
 win1.add(coords);
