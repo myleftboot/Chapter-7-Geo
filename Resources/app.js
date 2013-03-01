@@ -93,9 +93,9 @@ function setDistanceLabel(_args) {
 	coords.text = 'Distance from the equator: '+parseInt(_args.distance);
 };
 
-var coords = Ti.UI.createLabel({});
+var coords = Ti.UI.createLabel({top:0});
 if (isLocationAuthorized({purpose:'To display your current co-ordinates'})) {
-	alert('returned true');
+
 	getLocation(
 		{success : function(e) 
 			{setDistanceLabel(
