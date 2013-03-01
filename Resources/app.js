@@ -6,16 +6,17 @@ Titanium.UI.setBackgroundColor('#000');
 
 // create base root window
 //
+
 var win1 = Titanium.UI.createWindow({  
     backgroundColor:'#fff'
 });
 
 function isLocationAuthorized(_args) {
     //check that we are allowed to use
-    var retVal = true;
-    if (!Ti.Geolocation.locationServicesEnabled) return false;
     
-    if (Ti.Platform.name === 'iPhone OS') {
+    var retVal = true;
+    if (!Ti.Geolocation.locationServicesEnabled) {return false;}
+
       // Explain to the user why we are going to use the location services.
     
       Ti.Geolocation.purpose = _args.purpose;
@@ -29,7 +30,7 @@ function isLocationAuthorized(_args) {
       	// a device restriction prevents us from using location services
       	retVal = false;
       } else retVal = true;
-    }
+
     return retVal;
     
 };
@@ -93,8 +94,8 @@ function setDistanceLabel(_args) {
 };
 
 var coords = Ti.UI.createLabel({});
-
 if (isLocationAuthorized({purpose:'To display your current co-ordinates'})) {
+	alert('returned true');
 	getLocation(
 		{success : function(e) 
 			{setDistanceLabel(
@@ -106,7 +107,8 @@ if (isLocationAuthorized({purpose:'To display your current co-ordinates'})) {
 			}
 		}
 	);
-};
+}
+else {alert('Cannot use location services')};
 
 win1.add(coords);
 win1.open();
